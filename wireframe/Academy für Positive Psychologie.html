@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Academy für Positive Psychologie — Exported from UXMagic Copilot">
+    <title>Academy für Positive Psychologie</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Poppins:wght@100..900&amp;family=Fira+Code:wght@300..700&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <link id="theme-fonts" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&amp;family=Georgia:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@400;500;600;700&amp;display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Poppins:wght@100..900&amp;family=Fira+Code:wght@300..700&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <style type="text/tailwindcss">
+      @import "tailwindcss";
+      @theme inline {
+        --color-background: var(--background);
+        --color-foreground: var(--foreground);
+        --color-primary: var(--primary);
+        --color-primary-foreground: var(--primary-foreground);
+        --color-secondary: var(--secondary);
+        --color-secondary-foreground: var(--secondary-foreground);
+        --color-tertiary: var(--tertiary);
+        --color-tertiary-foreground: var(--tertiary-foreground);
+        --color-muted: var(--muted);
+        --color-muted-foreground: var(--muted-foreground);
+        --color-accent: var(--accent);
+        --color-accent-foreground: var(--accent-foreground);
+        --color-destructive: var(--destructive);
+        --color-destructive-foreground: var(--destructive-foreground);
+        --color-card: var(--card);
+        --color-card-foreground: var(--card-foreground);
+        --color-popover: var(--popover);
+        --color-popover-foreground: var(--popover-foreground);
+        --color-border: var(--border);
+        --color-input: var(--input);
+        --color-ring: var(--ring);
+        --radius-sm: calc(var(--radius) - 4px);
+        --radius-md: calc(var(--radius) - 2px);
+        --radius-lg: var(--radius);
+        --font-family-sans: var(--font-sans);
+        --font-family-heading: var(--font-heading);
+        --font-family-mono: var(--font-mono);
+        /* Tailwind v4's font namespace is --font-*, NOT --font-family-*.
+         *
+         * Without this line the font-heading utility does not exist at all,
+         * so every h1–h6 the design prompt mandates (font-heading) silently
+         * inherited the body's font-sans. A user could set --font-heading a
+         * dozen times, watch the tool report success, and never see the
+         * typeface change — the "font applied but not reflected" report.
+         *
+         * font-sans and font-mono are Tailwind built-ins and already read
+         * :root, which is why only headings were broken. The fallback chain
+         * keeps themes that never set a heading font rendering the body face
+         * instead of nothing. */
+        --font-heading: var(--font-heading, var(--font-sans, ui-sans-serif, system-ui, sans-serif));
+      }
+
+      /* Every filled surface carries its own text colour.
+       *
+       * Without this, <div class="bg-accent"> inherits --foreground from
+       * <html> — a colour chosen to contrast the PAGE, not the accent fill. On
+       * a dark theme with a bright accent that renders near-white text on
+       * near-white (or near-black on near-black): the invisible text users
+       * report. Pairing each fill with its own foreground makes the readable
+       * result the default instead of something the model has to remember.
+       *
+       * These sit in @layer base deliberately. Any explicit text-* utility is
+       * in @layer utilities and therefore still wins, so an intentional colour
+       * choice is never overridden. The neutral surfaces (background, muted)
+       * are left out: --foreground is already guaranteed readable on those, and
+       * forcing --muted-foreground would wash out headings in muted panels.
+       */
+      @layer base {
+        .bg-card { color: var(--card-foreground); }
+        .bg-popover { color: var(--popover-foreground, var(--card-foreground)); }
+        .bg-primary { color: var(--primary-foreground); }
+        .bg-secondary { color: var(--secondary-foreground); }
+        .bg-accent { color: var(--accent-foreground, var(--foreground)); }
+        .bg-tertiary { color: var(--tertiary-foreground, var(--primary-foreground)); }
+        .bg-destructive { color: var(--destructive-foreground, var(--primary-foreground)); }
+      }
+      :root {
+        --background: #FEFEFE;
+        --foreground: #063858;
+        --primary: #00416b;
+        --primary-foreground: #FFFFFF;
+        --secondary: #E8F1F1;
+        --secondary-foreground: #063858;
+        --tertiary: #0F8F87;
+        --muted: #F2F5F4;
+        --muted-foreground: #587077;
+        --accent: #DDF6EE;
+        --accent-foreground: #063858;
+        --card: #FFFFFF;
+        --card-foreground: #063858;
+        --destructive: #C94B4B;
+        --border: #C9DAD9;
+        --input: #B7CDCD;
+        --ring: #00416b;
+        --radius: 0.75rem;
+        --font-sans: Inter, Arial, sans-serif;
+        --font-heading: Georgia, serif;
+        --font-mono: JetBrains Mono, monospace;
+        --shadow-offset-x: 0;
+        --shadow-offset-y: 10;
+        --shadow-blur: 30;
+        --shadow-spread: -8;
+        --shadow-color: rgba(15, 23, 42, 0.12);
+        --tertiary-foreground: #171717;
+        --destructive-foreground: #FFFFFF;
+        --contrast-exempt: --primary;
+        --secondary-text: #707778;
+        --tertiary-text: #00847D;
+        --accent-text: #647A74;
+        --destructive-text: #C94B4B;
+        }
+    </style>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div data-page="academy-f-r-positive-psychologie">
+
+
+
+  
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Screen</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@100..900&amp;family=Poppins:wght@100..900&amp;family=Fira+Code:wght@300..700&amp;family=Plus+Jakarta+Sans:wght@200;300;400;500;600;700;800&amp;display=swap" rel="stylesheet">
+    
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://code.iconify.design/iconify-icon/3.0.0/iconify-icon.min.js"></script>
+    <style type="text/tailwindcss">
+      @import "tailwindcss";
+      @theme inline {
+        --color-background: var(--background);
+        --color-foreground: var(--foreground);
+        --color-primary: var(--primary);
+        --color-primary-foreground: var(--primary-foreground);
+        --color-secondary: var(--secondary);
+        --color-secondary-foreground: var(--secondary-foreground);
+        --color-tertiary: var(--tertiary);
+        --color-tertiary-foreground: var(--tertiary-foreground);
+        --color-muted: var(--muted);
+        --color-muted-foreground: var(--muted-foreground);
+        --color-accent: var(--accent);
+        --color-accent-foreground: var(--accent-foreground);
+        --color-destructive: var(--destructive);
+        --color-destructive-foreground: var(--destructive-foreground);
+        --color-card: var(--card);
+        --color-card-foreground: var(--card-foreground);
+        --color-popover: var(--popover);
+        --color-popover-foreground: var(--popover-foreground);
+        --color-border: var(--border);
+        --color-input: var(--input);
+        --color-ring: var(--ring);
+        --radius-sm: calc(var(--radius) - 4px);
+        --radius-md: calc(var(--radius) - 2px);
+        --radius-lg: var(--radius);
+        --font-family-sans: var(--font-sans);
+        --font-family-heading: var(--font-heading);
+        --font-family-mono: var(--font-mono);
+        /* Tailwind v4's font namespace is --font-*, NOT --font-family-*.
+         *
+         * Without this line the font-heading utility does not exist at all,
+         * so every h1–h6 the design prompt mandates (font-heading) silently
+         * inherited the body's font-sans. A user could set --font-heading a
+         * dozen times, watch the tool report success, and never see the
+         * typeface change — the "font applied but not reflected" report.
+         *
+         * font-sans and font-mono are Tailwind built-ins and already read
+         * :root, which is why only headings were broken. The fallback chain
+         * keeps themes that never set a heading font rendering the body face
+         * instead of nothing. */
+        --font-heading: var(--font-heading, var(--font-sans, ui-sans-serif, system-ui, sans-serif));
+      }
+
+      /* Every filled surface carries its own text colour.
+       *
+       * Without this, <div class="bg-accent"> inherits --foreground from
+       * <html> — a colour chosen to contrast the PAGE, not the accent fill. On
+       * a dark theme with a bright accent that renders near-white text on
+       * near-white (or near-black on near-black): the invisible text users
+       * report. Pairing each fill with its own foreground makes the readable
+       * result the default instead of something the model has to remember.
+       *
+       * These sit in @layer base deliberately. Any explicit text-* utility is
+       * in @layer utilities and therefore still wins, so an intentional colour
+       * choice is never overridden. The neutral surfaces (background, muted)
+       * are left out: --foreground is already guaranteed readable on those, and
+       * forcing --muted-foreground would wash out headings in muted panels.
+       */
+      @layer base {
+        .bg-card { color: var(--card-foreground); }
+        .bg-popover { color: var(--popover-foreground, var(--card-foreground)); }
+        .bg-primary { color: var(--primary-foreground); }
+        .bg-secondary { color: var(--secondary-foreground); }
+        .bg-accent { color: var(--accent-foreground, var(--foreground)); }
+        .bg-tertiary { color: var(--tertiary-foreground, var(--primary-foreground)); }
+        .bg-destructive { color: var(--destructive-foreground, var(--primary-foreground)); }
+      }
+      :root {  }
+    </style>
+    <style>
+      .brand-gradient { background-image: linear-gradient(135deg, var(--primary), var(--accent)); }
+      .shadow-theme {
+        box-shadow:
+          calc(var(--shadow-offset-x, 0) * 1px) calc(var(--shadow-offset-y, 10) * 1px)
+          calc(var(--shadow-blur, 30) * 1px) calc(var(--shadow-spread, -8) * 1px)
+          var(--shadow-color, rgba(15, 23, 42, 0.12));
+      }
+
+      /* Brand colours used as TEXT resolve to a legibility-adjusted variant.
+       *
+       * --primary and friends are tuned to look right as FILLS; painted as text
+       * on the page they are routinely too light — a #16A34A "+8.4%" on a white
+       * card measures 3.3:1. The --*-text tokens are the same hue and chroma
+       * with lightness nudged just far enough to clear AA on the page and card
+       * surfaces, so fills keep the exact brand colour while text becomes
+       * readable.
+       *
+       * This block is intentionally UNLAYERED: unlayered declarations outrank
+       * every cascade layer, so these beat Tailwind's own text-* utilities. The
+       * var() fallbacks leave documents that predate the derived tokens
+       * rendering exactly as before.
+       */
+      .text-primary { color: var(--primary-text, var(--primary)); }
+      .text-secondary { color: var(--secondary-text, var(--secondary)); }
+      .text-tertiary { color: var(--tertiary-text, var(--tertiary)); }
+      .text-accent { color: var(--accent-text, var(--accent)); }
+      .text-destructive { color: var(--destructive-text, var(--destructive)); }
+    </style>
+  
+  
+<div class="min-h-screen w-full bg-background flex flex-col relative">
+  <header class="relative z-20 bg-background">
+    <div class="mx-auto flex w-full max-w-7xl items-center justify-between px-6 py-5 lg:px-10">
+      <a href="#oben" class="flex items-center gap-3" aria-label="Academy für Positive Psychologie">
+        <span class="grid h-10 w-10 place-items-center rounded-full bg-primary text-primary-foreground"><iconify-icon icon="lucide:sprout" class="text-xl"></iconify-icon></span>
+        <span><span class="block font-heading text-lg font-semibold leading-none text-primary">Academy</span><span class="mt-1 block text-[10px] font-semibold tracking-[0.18em] text-muted-foreground">POSITIVE PSYCHOLOGIE</span></span>
+      </a>
+      <nav class="hidden items-center gap-8 text-sm font-medium text-foreground lg:flex">
+        <a href="#angebot" class="hover:text-primary">Angebot</a><a href="#module" class="hover:text-primary">Ausbildung</a><a href="#wissenschaft" class="hover:text-primary">Fundierung</a><a href="#team" class="hover:text-primary">Team</a>
+      </nav>
+      <a href="#anfrage" class="inline-flex min-h-11 items-center justify-center rounded-lg bg-primary px-5 text-sm font-semibold text-primary-foreground shadow-md">Vorregistrieren <iconify-icon icon="lucide:arrow-down" class="ml-2 text-base"></iconify-icon></a>
+    </div>
+  </header>
+
+  <main id="oben" class="flex-1">
+    <section class="relative overflow-hidden border-y border-border bg-secondary">
+      <div class="absolute inset-y-0 right-0 hidden w-[47%] bg-gradient-to-br from-primary via-primary to-tertiary lg:block"></div>
+      <div class="absolute right-[10%] top-12 hidden h-72 w-72 rounded-full border border-primary-foreground opacity-30 lg:block"></div>
+      <div class="absolute bottom-[-6rem] right-[24%] hidden h-56 w-56 rounded-full bg-accent opacity-40 lg:block"></div>
+      <div class="relative mx-auto grid w-full max-w-7xl grid-cols-1 lg:grid-cols-12">
+        <div class="px-6 py-20 lg:col-span-7 lg:px-10 lg:py-28">
+          <p class="mb-6 text-xs font-semibold uppercase tracking-[0.24em] text-secondary-foreground">Weiterbildung · Beratung · Forschung</p>
+          <h1 class="max-w-3xl text-balance font-heading text-4xl font-semibold leading-[1.08] text-primary lg:text-6xl">Positive Psychologie fundiert verstehen und wirksam vermitteln.</h1>
+          <p class="mt-7 max-w-xl text-pretty text-lg leading-8 text-foreground">Für Menschen, die Wohlbefinden, Ressourcen und gelingende Entwicklung nicht nur inspirierend, sondern fachlich reflektiert in ihre Arbeit bringen wollen.</p>
+          <div class="mt-10 flex flex-col gap-3 sm:flex-row">
+            <a href="#anfrage" class="inline-flex min-h-12 items-center justify-center rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-md">Unverbindlich vorregistrieren <iconify-icon icon="lucide:arrow-right" class="ml-2 text-base"></iconify-icon></a>
+            <a href="#module" class="inline-flex min-h-12 items-center justify-center rounded-lg border border-primary bg-background px-6 text-sm font-semibold text-primary">Module entdecken</a>
+          </div>
+          <div class="mt-14 flex items-center gap-4 border-l-2 border-tertiary pl-5"><p class="font-heading text-xl italic text-primary">„Wissen wird wirksam, wenn es Haltung findet.“</p></div>
+        </div>
+        <div class="relative flex min-h-80 items-end px-6 py-10 lg:col-span-5 lg:px-10 lg:py-14">
+          <div class="relative w-full overflow-hidden rounded-xl border border-primary-foreground bg-background p-7 shadow-md">
+            <div class="absolute right-0 top-0 h-20 w-20 rounded-bl-full bg-accent"></div>
+            <p class="relative text-xs font-semibold uppercase tracking-[0.2em] text-tertiary">Der Lernraum</p>
+            <h2 class="relative mt-5 font-heading text-2xl font-semibold leading-tight text-primary">Wissenschaftlich klar. Menschlich zugewandt.</h2>
+            <div class="relative mt-8 grid grid-cols-2 gap-5 border-t border-border pt-5"><div><p class="text-2xl font-heading text-primary">3</p><p class="mt-1 text-xs leading-5 text-muted-foreground">Lernmodule mit klarer Struktur</p></div><div><p class="text-2xl font-heading text-primary">1:1</p><p class="mt-1 text-xs leading-5 text-muted-foreground">Raum für Fragen und Transfer</p></div></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="angebot" class="mx-auto w-full max-w-7xl px-6 py-24 lg:px-10">
+      <div class="grid grid-cols-1 gap-10 lg:grid-cols-12 lg:items-end"><div class="lg:col-span-7"><p class="text-xs font-semibold uppercase tracking-[0.24em] text-tertiary">Unser Angebot</p><h2 class="mt-4 max-w-2xl text-balance text-3xl font-heading font-semibold leading-tight text-primary lg:text-4xl">Kompetenz, die in Ihrem Arbeitsfeld ankommt.</h2></div><p class="max-w-md text-pretty leading-7 text-muted-foreground lg:col-span-5">Die Academy verbindet wissenschaftliche Perspektiven der Positiven Psychologie mit einer Lernkultur, die Zeit für Anwendung und kritische Einordnung lässt.</p></div>
+      <div class="mt-12 grid grid-cols-1 gap-px overflow-hidden rounded-xl border border-border bg-border md:grid-cols-2 lg:grid-cols-4">
+        <article class="bg-card p-7"><span class="grid h-11 w-11 place-items-center rounded-lg bg-accent text-tertiary"><iconify-icon icon="lucide:book-open" class="text-xl"></iconify-icon></span><p class="mt-8 text-xs font-semibold tracking-[0.16em] text-tertiary">01</p><h3 class="mt-2 text-lg font-heading font-semibold text-primary">Fundiertes Grundlagenwissen</h3><p class="mt-3 text-sm leading-6 text-muted-foreground">Sie ordnen zentrale Modelle, Begriffe und Forschungsfragen sicher ein.</p></article>
+        <article class="bg-secondary p-7"><span class="grid h-11 w-11 place-items-center rounded-lg bg-primary text-primary-foreground"><iconify-icon icon="lucide:move-up-right" class="text-xl"></iconify-icon></span><p class="mt-8 text-xs font-semibold tracking-[0.16em] text-secondary-foreground">02</p><h3 class="mt-2 text-lg font-heading font-semibold text-primary">Transfer in die Praxis</h3><p class="mt-3 text-sm leading-6 text-muted-foreground">Sie entwickeln Impulse für Beratung, Bildung und organisationale Entwicklung.</p></article>
+        <article class="bg-card p-7"><span class="grid h-11 w-11 place-items-center rounded-lg bg-accent text-tertiary"><iconify-icon icon="lucide:messages-square" class="text-xl"></iconify-icon></span><p class="mt-8 text-xs font-semibold tracking-[0.16em] text-tertiary">03</p><h3 class="mt-2 text-lg font-heading font-semibold text-primary">Reflexion im Austausch</h3><p class="mt-3 text-sm leading-6 text-muted-foreground">Sie schärfen Ihre Perspektive durch Übungen, Dialog und unterschiedliche Erfahrungshorizonte.</p></article>
+        <article class="bg-primary p-7"><span class="grid h-11 w-11 place-items-center rounded-lg bg-accent text-tertiary"><iconify-icon icon="lucide:compass" class="text-xl"></iconify-icon></span><p class="mt-8 text-xs font-semibold tracking-[0.16em] text-primary-foreground">04</p><h3 class="mt-2 text-lg font-heading font-semibold text-primary-foreground">Persönliche Begleitung</h3><p class="mt-3 text-sm leading-6 text-primary-foreground">Sie finden Orientierung für Ihren individuellen Lernweg und die nächsten Schritte.</p></article>
+      </div>
+    </section>
+
+    <section id="module" class="border-y border-border bg-muted py-24"><div class="mx-auto w-full max-w-7xl px-6 lg:px-10"><div class="grid grid-cols-1 gap-12 lg:grid-cols-12"><div class="lg:col-span-4"><p class="text-xs font-semibold uppercase tracking-[0.24em] text-muted-foreground">Ausbildungsmodule</p><h2 class="mt-4 text-balance text-3xl font-heading font-semibold leading-tight text-primary">Ein klarer Weg durch die zentralen Themen.</h2><p class="mt-5 text-pretty leading-7 text-muted-foreground">In drei aufeinander aufbauenden Modulen entsteht ein solides Verständnis – und ein konkreter Bezug zum eigenen Arbeitskontext.</p><div class="mt-8 rounded-xl border border-border bg-background p-5"><iconify-icon icon="lucide:badge-check" class="text-2xl text-tertiary"></iconify-icon><p class="mt-3 font-heading text-lg font-semibold text-primary">Abschluss &amp; Zertifikat</p><p class="mt-2 text-sm leading-6 text-muted-foreground">Die verbindliche Abschlussform wird vor dem Programmstart transparent kommuniziert.</p></div></div>
+      <div class="space-y-4 lg:col-span-8"><article class="grid grid-cols-1 gap-5 rounded-xl border border-border bg-card p-6 md:grid-cols-12"><div class="md:col-span-2"><span class="font-heading text-5xl leading-none text-tertiary">01</span></div><div class="md:col-span-7"><h3 class="text-xl font-heading font-semibold text-primary">Grundlagen &amp; Perspektiven</h3><p class="mt-2 text-sm leading-6 text-muted-foreground">Begriffe, Modelle und Fragestellungen der Positiven Psychologie einordnen und kritisch reflektieren.</p></div><div class="border-t border-border pt-4 md:col-span-3 md:border-l md:border-t-0 md:pl-5 md:pt-0"><p class="text-xs font-semibold uppercase tracking-[0.14em] text-tertiary">Format · Dauer</p><p class="mt-2 text-sm text-foreground">Online · 2 Tage</p></div></article>
+      <article class="grid grid-cols-1 gap-5 rounded-xl border border-border bg-card p-6 md:grid-cols-12"><div class="md:col-span-2"><span class="font-heading text-5xl leading-none text-tertiary">02</span></div><div class="md:col-span-7"><h3 class="text-xl font-heading font-semibold text-primary">Ressourcen &amp; Wohlbefinden</h3><p class="mt-2 text-sm leading-6 text-muted-foreground">Stärken, Emotionen und gelingende Beziehungen als Ansatzpunkte für Entwicklung erkunden.</p></div><div class="border-t border-border pt-4 md:col-span-3 md:border-l md:border-t-0 md:pl-5 md:pt-0"><p class="text-xs font-semibold uppercase tracking-[0.14em] text-tertiary">Format · Dauer</p><p class="mt-2 text-sm text-foreground">Präsenz · 2 Tage</p></div></article>
+      <article class="grid grid-cols-1 gap-5 rounded-xl bg-primary p-6 md:grid-cols-12"><div class="md:col-span-2"><span class="font-heading text-5xl leading-none text-primary-foreground">03</span></div><div class="md:col-span-7"><h3 class="text-xl font-heading font-semibold text-primary-foreground">Anwendung &amp; Transfer</h3><p class="mt-2 text-sm leading-6 text-primary-foreground">Erkenntnisse in konkrete Kontexte übertragen und tragfähige Handlungsmöglichkeiten entwickeln.</p></div><div class="border-t border-primary-foreground pt-4 md:col-span-3 md:border-l md:border-t-0 md:pl-5 md:pt-0"><p class="text-xs font-semibold uppercase tracking-[0.14em] text-primary-foreground">Format · Dauer</p><p class="mt-2 text-sm text-primary-foreground">Online · 1 Tag</p></div></article></div></div></div></section>
+
+    <section id="wissenschaft" class="mx-auto w-full max-w-7xl px-6 py-24 lg:px-10"><div class="grid grid-cols-1 gap-12 lg:grid-cols-12"><div class="lg:col-span-5"><p class="text-xs font-semibold uppercase tracking-[0.24em] text-tertiary">Warum diese Academy</p><h2 class="mt-4 text-balance text-3xl font-heading font-semibold leading-tight text-primary">Sorgfalt vor großen Versprechen.</h2><p class="mt-5 text-pretty leading-7 text-muted-foreground">Hier geht es nicht um schnelle Rezepte. Die Academy schafft einen fundierten Rahmen, in dem Theorie, Erfahrung und professionelle Praxis miteinander in Gespräch kommen.</p><div class="mt-8 flex flex-wrap gap-3"><span class="rounded-full border border-border bg-secondary px-4 py-2 text-xs font-semibold text-primary">Forschungsorientiert</span><span class="rounded-full border border-border bg-secondary px-4 py-2 text-xs font-semibold text-primary">Praxisbezogen</span><span class="rounded-full border border-border bg-secondary px-4 py-2 text-xs font-semibold text-primary">Persönlich begleitet</span></div></div><div class="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:col-span-7"><article class="border-t-2 border-tertiary bg-secondary p-6"><iconify-icon icon="lucide:flask-conical" class="text-2xl text-tertiary"></iconify-icon><h3 class="mt-5 font-heading text-lg font-semibold text-primary">Wissenschaftlich orientiert</h3><p class="mt-2 text-sm leading-6 text-muted-foreground">Inhalte werden nachvollziehbar kontextualisiert statt verkürzt vermittelt.</p></article><article class="border-t-2 border-primary bg-card p-6 shadow-md"><iconify-icon icon="lucide:layers-3" class="text-2xl text-tertiary"></iconify-icon><h3 class="mt-5 font-heading text-lg font-semibold text-primary">Fachlich vertieft</h3><p class="mt-2 text-sm leading-6 text-muted-foreground">Zusammenhänge erhalten Raum, damit Wissen tragfähig wird.</p></article><article class="border-t-2 border-primary bg-card p-6 shadow-md"><iconify-icon icon="lucide:briefcase-business" class="text-2xl text-tertiary"></iconify-icon><h3 class="mt-5 font-heading text-lg font-semibold text-primary">Praxisnah gedacht</h3><p class="mt-2 text-sm leading-6 text-muted-foreground">Lernimpulse werden mit realen beruflichen und persönlichen Kontexten verbunden.</p></article><article class="border-t-2 border-tertiary bg-secondary p-6"><iconify-icon icon="lucide:circle-user-round" class="text-2xl text-tertiary"></iconify-icon><h3 class="mt-5 font-heading text-lg font-semibold text-primary">Persönlich begleitet</h3><p class="mt-2 text-sm leading-6 text-muted-foreground">Fragen und Reflexion sind integraler Teil des Lernprozesses.</p></article></div></div></section>
+
+    <section id="team" class="bg-secondary py-24"><div class="mx-auto w-full max-w-7xl px-6 lg:px-10"><div class="flex flex-col justify-between gap-5 lg:flex-row lg:items-end"><div><p class="text-xs font-semibold uppercase tracking-[0.24em] text-secondary-foreground">Unser Team</p><h2 class="mt-4 text-balance text-3xl font-heading font-semibold text-primary">Menschen hinter dem Lernraum.</h2></div><p class="max-w-md text-pretty leading-7 text-muted-foreground">Zwei Perspektiven, ein gemeinsames Anliegen: Positive Psychologie mit fachlicher Tiefe und zugewandter Klarheit zugänglich machen.</p></div><div class="mt-12 grid grid-cols-1 gap-6 md:grid-cols-2"><article class="grid overflow-hidden rounded-xl bg-card shadow-md md:grid-cols-5"><img src="https://uxmagic.blob.core.windows.net/public/agent-images/academy-team-1-1791194628894-2xdfk3umbgw.png" alt="Portrait einer Dozentin für Positive Psychologie" class="h-full min-h-72 w-full object-cover md:col-span-2" width="1024" height="1024"><div class="p-7 md:col-span-3"><p class="text-xs font-semibold uppercase tracking-[0.16em] text-tertiary">Fachliche Leitung</p><h3 class="mt-2 text-2xl font-heading font-semibold text-primary">Dr. Anna Keller</h3><p class="mt-1 text-sm text-muted-foreground">Psychologin · Wissenschaft &amp; Didaktik</p><p class="mt-5 text-sm leading-6 text-foreground">Anna verbindet Forschung mit der Frage, wie Lernen im Alltag tatsächlich Wirkung entfaltet. Ihr Anliegen: Komplexität verständlich machen, ohne sie zu vereinfachen.</p></div></article><article class="grid overflow-hidden rounded-xl bg-card shadow-md md:grid-cols-5"><img src="https://uxmagic.blob.core.windows.net/public/agent-images/academy-team-2-1791194639119-h91xygvtrib.png" alt="Portrait eines Forschers für Positive Psychologie" class="h-full min-h-72 w-full object-cover md:col-span-2" width="1024" height="1024"><div class="p-7 md:col-span-3"><p class="text-xs font-semibold uppercase tracking-[0.16em] text-tertiary">Lernbegleitung</p><h3 class="mt-2 text-2xl font-heading font-semibold text-primary">Prof. Martin Reuter</h3><p class="mt-1 text-sm text-muted-foreground">Psychologe · Beratung &amp; Transfer</p><p class="mt-5 text-sm leading-6 text-foreground">Martin schafft Räume, in denen professionelle Erfahrung und neue Erkenntnisse auf Augenhöhe zusammenkommen – für einen Transfer, der zum eigenen Kontext passt.</p></div></article></div></div></section>
+
+    <section id="anfrage" class="mx-auto w-full max-w-7xl px-6 py-24 lg:px-10"><div class="grid overflow-hidden rounded-xl bg-primary shadow-md lg:grid-cols-12"><div class="p-8 lg:col-span-5 lg:p-12"><p class="text-xs font-semibold uppercase tracking-[0.24em] text-primary-foreground">Unverbindlich anfragen</p><h2 class="mt-5 text-balance text-3xl font-heading font-semibold leading-tight text-primary-foreground">Interesse vormerken – ohne Verpflichtung.</h2><p class="mt-6 text-pretty leading-7 text-primary-foreground">Wir informieren Sie, sobald Termine, Formate und weitere Programmdetails feststehen. Ihre Anfrage dient ausschließlich der Kontaktaufnahme.</p><div class="mt-10 border-t border-primary-foreground pt-6"><div class="flex gap-3"><iconify-icon icon="lucide:shield-check" class="mt-0.5 text-xl text-accent"></iconify-icon><p class="text-sm leading-6 text-primary-foreground">Ihre Daten behandeln wir vertraulich. Kein Newsletter ohne Einwilligung, keine Verpflichtung.</p></div></div></div><form class="bg-card p-8 lg:col-span-7 lg:p-12"><div class="grid gap-5"><div><label for="name" class="mb-2 block text-sm font-semibold text-foreground">Ihr Name</label><input id="name" type="text" placeholder="Ihr Name" class="min-h-12 w-full rounded-lg border border-input bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground"></div><div><label for="mail" class="mb-2 block text-sm font-semibold text-foreground">E-Mail-Adresse</label><input id="mail" type="email" placeholder="name@beispiel.de" class="min-h-12 w-full rounded-lg border border-input bg-background px-4 text-sm text-foreground placeholder:text-muted-foreground"></div><div><label for="interest" class="mb-2 block text-sm font-semibold text-foreground">Ihr Interessensbereich <span class="font-normal text-muted-foreground">(optional)</span></label><textarea id="interest" rows="3" placeholder="z. B. beruflicher Kontext oder eine Frage" class="w-full rounded-lg border border-input bg-background p-4 text-sm text-foreground placeholder:text-muted-foreground"></textarea></div><button type="button" class="inline-flex min-h-12 items-center justify-center rounded-lg bg-primary px-6 text-sm font-semibold text-primary-foreground shadow-md">Vorregistrierung senden <iconify-icon icon="lucide:send" class="ml-2 text-base"></iconify-icon></button></div></form></div></section>
+  </main>
+  <footer class="border-t border-border bg-background"><div class="mx-auto flex w-full max-w-7xl flex-col gap-4 px-6 py-8 text-sm text-muted-foreground lg:flex-row lg:items-center lg:justify-between lg:px-10"><p>Academy für Positive Psychologie · Wissenschaftlich fundierte Weiterbildung</p><div class="flex gap-5"><a href="#oben" class="hover:text-primary">Nach oben</a><a href="#anfrage" class="hover:text-primary">Kontakt</a></div></div></footer>
+</div>
+
+
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>
