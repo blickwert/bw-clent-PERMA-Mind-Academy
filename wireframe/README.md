@@ -15,7 +15,7 @@ Open any of the HTML files directly in a browser — no build step needed.
 
 ```
 Positive Psychologie Academy/
- ├── Academy für Positive Psychologie.html
+ ├── index.html
  ├── styles.css
  ├── script.js
  ├── package.json
